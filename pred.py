@@ -60,7 +60,7 @@ history = model.fit(
     verbose=1
 )
 
-#Предсказание и инверсия скейла ─────────────────────────────────────
+#Предсказание и инверсия скейла
 y_pred_scaled = model.predict(X_test).reshape(-1, 1)
 y_pred = scaler_y.inverse_transform(y_pred_scaled).flatten()
 y_true = scaler_y.inverse_transform(y_test).flatten()

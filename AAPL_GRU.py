@@ -28,7 +28,8 @@ dates  = df["date"]
 
 # 3) Масштабирование
 scaler_X = StandardScaler()
-X_all = scaler_X.fit_transform(df[["average_sentiment_lagged", "ma5", "ma10"]])
+X_all = scaler_X.fit_transform(df[["average_sentiment_lagged", "ma5", "ma10"]]) #но даже без ma5, ma10 норм работает в плане направления
+
 scaler_y = MinMaxScaler()
 y_all = scaler_y.fit_transform(prices)
 

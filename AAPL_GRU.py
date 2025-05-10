@@ -6,7 +6,7 @@ import tensorflow as tf
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.metrics import mean_squared_error, f1_score
 from tensorflow.keras.models import Model
-from tensorflow.keras.layers import Input, GRU, Dense, Dropout  # Заменили LSTM на GRU
+from tensorflow.keras.layers import Input, GRU, Dense, Dropout  
 from tensorflow.keras.callbacks import EarlyStopping
 import matplotlib.pyplot as plt
 import tensorflow.keras.backend as K

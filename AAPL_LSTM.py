@@ -15,7 +15,7 @@ features = ["average_sentiment_lagged"]
 X = merged[features].values
 y = merged["Close"].values.reshape(-1, 1)
 
-# Масштабируем признаки и целевую переменную
+
 scaler_X = StandardScaler()
 X_scaled = scaler_X.fit_transform(X)
 
@@ -60,29 +60,28 @@ history = model.fit(
     verbose=1
 )
 
-#Предсказание и инверсия скейла
+
 y_pred_scaled = model.predict(X_test).reshape(-1, 1)
 y_pred = scaler_y.inverse_transform(y_pred_scaled).flatten()
 y_true = scaler_y.inverse_transform(y_test).flatten()
 
-# Расчет метрик RMSE и F1 Score по направлению
-# Вычисляем RMSE
+
 rmse = np.sqrt(mean_squared_error(y_true, y_pred))
 mse = mean_squared_error(y_true, y_pred)
 print(f"LSTM RMSE on test set (original scale): {rmse:.4f}")
 print(f"LSTM MSE on test set (original scale): {mse:.4f}")
 
 
-# направления движения (0 = вниз, 1 = вверх)
+
 def calculate_directions(prices):
     return np.where(np.diff(prices) > 0, 1, 0)
 
 
-# Реальные и предсказанные направления
+
 y_true_direction = calculate_directions(y_true)
 y_pred_direction = calculate_directions(y_pred)
 
-# F1 Score
+
 f1 = f1_score(y_true_direction, y_pred_direction)
 print(f"LSTM F1 Score on test set (directional): {f1:.4f}")
 

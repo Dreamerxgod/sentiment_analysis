@@ -9,19 +9,16 @@ news_data = news_data[news_data['symbols'].str.contains('AAPL', na=False)]
 adj_close = pd.read_csv("aapl_adj_close_3y.csv")
 adj_close['Date'] = pd.to_datetime(adj_close['Date'], utc=True).dt.date
 
-# Объединяем два датафрейма по дате
 merged_data = pd.merge(news_data, adj_close, left_on='date', right_on='Date', how='inner')
 
 merged_data = merged_data.dropna(subset=['content', 'title'])
 
-# Все content и title остаются привязанными к дате
 grouped_data = merged_data.groupby('date').agg({
     'title': list,
     'content': list,
     'Close': 'first'
 }).reset_index()
 
-# Скачиваем sentiment-анализатор
 sentiment_pipe = pipeline(
     "text-classification",
     model="ProsusAI/finbert",
@@ -30,7 +27,6 @@ sentiment_pipe = pipeline(
 )
 
 
-# Функция для анализа сентимента
 def get_sentiment_score(text: str) -> float:
     res = sentiment_pipe(text[:512])[0]
     if res["label"] == "positive":
@@ -40,7 +36,7 @@ def get_sentiment_score(text: str) -> float:
     return None
 
 
-# Функция для расчёта среднего сентимента по одной дате
+
 def calculate_average_sentiment(content_list):
     sentiment_scores = []
     for text in content_list:
@@ -52,7 +48,6 @@ def calculate_average_sentiment(content_list):
     return sum(sentiment_scores) / len(sentiment_scores)
 
 
-# Рассчитываем sentiment для каждого списка
 grouped_data['average_sentiment'] = grouped_data['content'].apply(calculate_average_sentiment)
 
 grouped_data = grouped_data.dropna(subset=['average_sentiment'])

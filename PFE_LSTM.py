@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 # tf.random.set_seed(42)
 
 
-df = pd.read_csv("tweets_de_sentiment_output.csv", parse_dates=["date"])
+df = pd.read_csv("tweets_pfe_sentiment_output.csv", parse_dates=["date"])
 df["average_sentiment_lagged"] = df["average_sentiment"].shift(0)
 df["ma5"]  = df["price"].rolling(5).mean().shift(1)
 df["ma10"] = df["price"].rolling(10).mean().shift(1)

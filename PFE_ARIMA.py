@@ -27,7 +27,7 @@ def technical_indicators(df):
     return df
 
 def load_and_prepare_data():
-    df = pd.read_csv('tweets_de_sentiment_output.csv', parse_dates=['date'])
+    df = pd.read_csv('tweets_pfe_sentiment_output.csv', parse_dates=['date'])
     df = technical_indicators(df)
     df = df.sort_values('date').set_index('date')
 
@@ -101,7 +101,6 @@ if __name__ == '__main__':
     df = load_and_prepare_data()
     df, close_scaler = scale_data(df)
 
-    # Train-test split
     train_size = int(len(df) * 0.8)
     train_df, test_df = df.iloc[:train_size], df.iloc[train_size:]
 

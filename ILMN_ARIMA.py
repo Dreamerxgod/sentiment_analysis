@@ -86,7 +86,6 @@ def predict(model_fit, test_data, close_scaler):
 def plot_results(test, predicted, actual):
     plt.figure(figsize=(14, 7))
     plt.plot(test.index, actual, label='Actual Price', linewidth=2)
-    # Dashed line with distinct color for predicted price
     plt.plot(test.index, predicted, label='Predicted Price', linestyle='--', color='magenta')
 
     plt.title('ARIMA Stock Price Prediction')
@@ -100,8 +99,6 @@ def plot_results(test, predicted, actual):
 if __name__ == '__main__':
     df = load_and_prepare_data()
     df, close_scaler = scale_data(df)
-
-    # Train-test split
     train_size = int(len(df) * 0.8)
     train_df, test_df = df.iloc[:train_size], df.iloc[train_size:]
 

@@ -77,8 +77,8 @@ def build_model(input_shape):
             "direction": weighted_bce
         },
         loss_weights={
-            "price": 1.0,
-            "direction": 25.0
+            "price": 2.0,
+            "direction": 5.0
         }
     )
     return m

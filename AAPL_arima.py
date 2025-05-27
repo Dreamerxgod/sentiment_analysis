@@ -130,8 +130,4 @@ if __name__ == "__main__":
     print(f"RMSE: {rmse:.2f}")
     print(f"MAE: {mae:.2f}")
     print(f"F1 Score: {f1:.2f}")
-    print("\nClassification Report:")
-    print(classification_report((np.diff(actual.flatten()) > 0).astype(int),
-                                (np.diff(predicted.flatten()) > 0).astype(int)))
-
     plot_results(train, test, predicted, actual)

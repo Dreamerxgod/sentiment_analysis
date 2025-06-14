@@ -25,7 +25,7 @@ prices = df["Close"].values.reshape(-1,1)
 dates  = df["date"]
 
 scaler_X = StandardScaler()
-X_all = scaler_X.fit_transform(df[["average_sentiment_lagged", "ma5", "ma10"]]) #но даже без ma5, ma10 норм работает в плане направления
+X_all = scaler_X.fit_transform(df[["average_sentiment_lagged", "ma5"]]) 
 
 scaler_y = MinMaxScaler()
 y_all = scaler_y.fit_transform(prices)

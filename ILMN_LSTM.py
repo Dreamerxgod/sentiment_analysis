@@ -36,7 +36,7 @@ prices = df["price"].values.reshape(-1,1)
 dates  = df["date"]
 
 scaler_X = StandardScaler()
-X_all = scaler_X.fit_transform(df[["average_sentiment_lagged", "ma5","ma10", "RSI_14"]])
+X_all = scaler_X.fit_transform(df[["average_sentiment_lagged", "ma5"]])
 scaler_y = MinMaxScaler()
 y_all = scaler_y.fit_transform(prices)
 

@@ -40,7 +40,7 @@ def scale_data(data):
     data['scaled_Close'] = close_scaler.fit_transform(data[['price']])
 
     feature_scaler = StandardScaler()
-    features = ['average_sentiment', 'MA5', 'MA10', 'RSI_14']
+    features = ['average_sentiment', 'MA5']
     data[features] = feature_scaler.fit_transform(data[features])
 
     return data, close_scaler

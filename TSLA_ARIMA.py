@@ -43,7 +43,7 @@ def scale_data(data):
     data['scaled_Close'] = close_scaler.fit_transform(data[['price']])
 
     feature_scaler = StandardScaler()
-    features = ['average_sentiment', 'MA5', 'MA10', 'RSI_14']
+    features = ['average_sentiment', 'MA5', 'MA10']
     data[features] = feature_scaler.fit_transform(data[features])
 
     return data, close_scaler
@@ -71,7 +71,7 @@ def find_best_arima_params(train_data):
     return best_order
 
 def predict(model, test_data, close_scaler):
-    exog_features = ['average_sentiment', 'RSI_14', "MA5"]
+    exog_features = ['average_sentiment', "MA5"]
     forecast = model.get_forecast(steps=len(test_data), exog=test_data[exog_features])
 
     predicted_scaled = forecast.predicted_mean
